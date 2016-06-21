@@ -27,7 +27,9 @@ for afp_name in afps:
             aux = df.pct_change(1).resample('A').sum()
             # Grafo rentabilidad
             fig, ax = plt.subplots(figsize=(8,8))
+            # Media movil 5 agnos
             aux.rolling(window=5,center=False).median().plot(ax=ax)
+            # Rentabilidad anual
             aux.plot(title='Rentabilidad %s Promedio Anual %s fondo %s'%(tipo,afp_name,fondo), kind='bar', ax=ax)
             # Fix date format on bar plot with pandas
             # Make most of the ticklabels empty so the labels don't get too crowded
