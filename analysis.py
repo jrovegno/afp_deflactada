@@ -1,7 +1,5 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
-import matplotlib.dates as mdates
 from datetime import datetime
 
 karg_csv = dict(delimiter=';', decimal=',', index_col=0, parse_dates=True)
@@ -27,8 +25,13 @@ for afp_name in afps:
             df = vcf.loc['1981':,[fondo]].resample('M').last()
             # Rentabilidad promedio anual = suma rentabilidades mensuales
             aux = df.pct_change(1).resample('A').sum()
-            # Media movil 5 agnos
-            aux['%s-movil_5'%fondo] = aux.rolling(window=5).mean()
+            
+            if fondo == 'C':
+                  # Media movil 10 agnos
+                  aux['%s-movil_10'%(fondo)] = aux[[fondo]].rolling(window=10).mean()
+            else:
+                  # Media movil 5 agnos
+                  aux['%s-movil_5'%(fondo)] = aux[[fondo]].rolling(window=5).mean() 
             # Grafo rentabilidad
             fig, ax = plt.subplots(figsize=(8,8))
             # Rentabilidad anual
