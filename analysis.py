@@ -50,6 +50,6 @@ for afp_name in afps:
             ticklabels[::step] = aux.year.values[::step]
             ax.xaxis.set_ticklabels(ticklabels)
             plt.legend(loc=3)
-            plt.savefig('rent-%s-%s-%s.png'%(tipo,afp_name,fondo))
+            plt.savefig('rent-%s/rent-%s-%s-%s.png'%(tipo,tipo,afp_name,fondo))
             plt.show()
 
